@@ -24,3 +24,11 @@ const operate = () => {
     return result;
 }
 
+// All eventListener for each button
+const buttons = document.querySelectorAll('.inputButton')
+
+for (let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener('click', () => {
+        console.log(buttons[i].id);
+    })
+}
