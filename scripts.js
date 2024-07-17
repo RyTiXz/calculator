@@ -1,3 +1,18 @@
+// Date event screen
+const today = new Date();
+const date = today.getDate() + '-' + (today.getMonth()+1 + '-' + today.getFullYear());
+const dateSelector = document.querySelector('.date')
+const showDate = document.createElement('p')
+dateSelector.appendChild(showDate)
+dateSelector.textContent = date
+
+// Time event sceen
+const time = today.getHours() + ":" + today.getMinutes();
+const timeSelector = document.querySelector('.time')
+const showtime = document.createElement('p')
+timeSelector.appendChild(showtime)
+timeSelector.textContent = time
+
 // Basic math functions with single operators
 const add = (a, b) => a + b;
 const substrac = (a, b) => a - b;
@@ -32,18 +47,3 @@ for (let i = 0; i < buttons.length; i++) {
         console.log(buttons[i].id);
     })
 }
-
-// Date event
-const today = new Date();
-const date = today.getDate() + '-' + (today.getMonth()+1 + '-' + today.getFullYear());
-const dateSelector = document.querySelector('.date')
-const showDate = document.createElement('p')
-dateSelector.appendChild(showDate)
-dateSelector.textContent = date
-
-// Time event
-const time = today.getHours() + ":" + today.getMinutes();
-const timeSelector = document.querySelector('.time')
-const showtime = document.createElement('p')
-timeSelector.appendChild(showtime)
-timeSelector.textContent = time
