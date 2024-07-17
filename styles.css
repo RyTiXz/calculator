@@ -9,6 +9,8 @@ html {
     font-size: 20px;
     display: table;
     margin: auto;
+    background: lightgrey;
+    color: white;
 
 }
 
@@ -17,6 +19,81 @@ body {
     vertical-align: middle;
 }
 
-.calculatorOutside {
-    border: solid black;
+.calculatorInside {
+    border: solid grey 5px;
+    border-radius: 25px;
+    background-color: black;
+}
+
+.timeScreen {
+    border: solid grey;
+    border-radius: 20px;
+    height: 10px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.time {
+    border: solid grey;
+    height: 5px;
+    width: 20px;
+    margin-left: 5px;
+    
+
+}
+
+.inputScreen {
+    border: solid grey;
+    height: 40px;
+    margin: 10px;
+}
+
+.calculatorArea {
+    padding: 0 10px 10px 10px;
+}
+
+button {
+    background-color: darkslategray;
+    border: none;
+    color: white;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 100px;
+    font-size: 16px;
+  }
+
+  .calculatorRow {
+    margin: 8px 0px;
+  }
+
+  .calculatorRow#row5 {
+    margin: 0px 0px;
+  }
+
+  .deletAndCustomize {
+    background: grey;
+  }
+
+  .operatorButton {
+    background-color: orange;
+  }
+
+#row5 {
+    display: flex;
+    flex-grow: 1;
+}
+
+.forZero {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-around;
+    margin: 0 10px 0 0;
+}
+
+#zero {
+    flex-grow: 1;
 }
