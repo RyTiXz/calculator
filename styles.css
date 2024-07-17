@@ -47,7 +47,6 @@ body {
 }
 
 .inputScreen {
-    border: solid grey;
     height: 40px;
     margin: 10px;
     display: flex;
