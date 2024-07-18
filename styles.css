@@ -23,6 +23,7 @@ body {
     border: solid grey 5px;
     border-radius: 25px;
     background-color: black;
+    max-width: 217px;
 }
 
 .headScreen {
@@ -110,6 +111,6 @@ button {
     margin: 0 10px 0 0;
 }
 
-#zero {
+.inputButtonZero {
     flex-grow: 1;
 }

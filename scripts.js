@@ -13,6 +13,11 @@ const showtime = document.createElement('p')
 timeSelector.appendChild(showtime)
 timeSelector.textContent = time
 
+// All eventListener for each button
+const buttons = document.querySelectorAll('.inputButton')
+const zeroButton = document.querySelectorAll('.inputButtonZero')
+const inputNumber = document.querySelector('p.inputNumber')
+
 // Basic math functions with single operators
 const add = (a, b) => a + b;
 const substrac = (a, b) => a - b;
@@ -20,30 +25,123 @@ const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
 
 // Variables for holding user input
-const firstNumber = 5;
-const operator = '';
-const secondNumber = 3;
+let firstNumber = 0;
+let operator = '';
+let secondNumber = 0;
 
 // Function to calculate result
-const operate = () => {
+const operate = (firstNumber, operator, secondNumber) => {
     let result = 0;
-    if (operator === '+') {
+    if (operator === 'add') {
         result = add(firstNumber, secondNumber);
-    } else if (operator === '-') {
+    } else if (operator === 'minus') {
         result = substrac(firstNumber, secondNumber);
-    } else if (operator === '*') {
-        result = multiply(firstNumber * secondNumber);
-    } else if (operator === '/') {
-        result = divide(firstNumber / secondNumber);
+    } else if (operator === 'multiply') {
+        result = multiply(firstNumber, secondNumber);
+    } else if (operator === 'divide') {
+        result = divide(firstNumber, secondNumber);
     }
-    return result;
+    inputNumber.textContent = result;
 }
 
-// All eventListener for each button
-const buttons = document.querySelectorAll('.inputButton')
+console.log(5 * 5);
+// EventListener for alle numeric buttons
+zeroButton.forEach(button => {
+    if (button.id == 0) {
+    button.addEventListener('click', () => {
+        if (inputNumber.textContent == 0) {
+            inputNumber.textContent = button.id;
+        } else {
+            inputNumber.textContent += button.id;
+        }
+    });
+}});
 
-for (let i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener('click', () => {
-        console.log(buttons[i].id);
-    })
-}
+buttons.forEach(button => {
+    if (button.id <= 9) {
+    button.addEventListener('click', () => {
+        if (inputNumber.textContent == 0) {
+            inputNumber.textContent = button.id;
+        } else {
+            inputNumber.textContent += button.id;
+        }
+    });
+}});
+
+
+//Event Listener for all grey buttons
+// AC
+buttons.forEach(button => {
+    if (button.id == 'ac') {
+    button.addEventListener('click', () => {
+        inputNumber.textContent = "0";
+    });
+    // Not working for now //
+    // if (inputNumber.textContent !== "0") {
+    //     buttons[0].textContent = "C"
+    // }
+}});
+// plusMinus
+buttons.forEach(button => {
+    if (button.id == 'plusMinus') {
+    button.addEventListener('click', () => {
+        let numberSafe = inputNumber.textContent;
+        numberSafe *= -1
+        inputNumber.textContent = numberSafe;
+    });
+}});
+// percentage
+buttons.forEach(button => {
+    if (button.id == 'percentage') {
+    button.addEventListener('click', () => {
+        let numberSafe = inputNumber.textContent;
+        numberSafe /= 100
+        inputNumber.textContent = numberSafe;
+    });
+}});
+
+
+// EventListener for result
+buttons.forEach(button => {
+    if (button.id == 'result') {
+    button.addEventListener('click', () => {
+        secondNumber = Number(inputNumber.textContent);
+        operate(firstNumber, operator, secondNumber)
+    });
+}});
+
+
+// EventListener for all operator button
+buttons.forEach(button => {
+    if (button.id == 'add') {
+        button.addEventListener('click', () => {
+            operator = "add";
+            firstNumber = Number(inputNumber.textContent);
+            inputNumber.textContent = 0;
+        });
+    }});
+buttons.forEach(button => {
+    if (button.id == 'substract') {
+        button.addEventListener('click', () => {
+            operator = "minus";
+            firstNumber = Number(inputNumber.textContent);
+            inputNumber.textContent = 0;
+        });
+    }});
+buttons.forEach(button => {
+    if (button.id == 'multiply') {
+        button.addEventListener('click', () => {
+            operator = "multiply";
+            firstNumber = Number(inputNumber.textContent);
+            inputNumber.textContent = 0;
+        });
+    }});
+buttons.forEach(button => {
+    if (button.id == 'divide') {
+        button.addEventListener('click', () => {
+            operator = "divide";
+            firstNumber = Number(inputNumber.textContent);
+            inputNumber.textContent = 0;
+        });
+    }});
+
