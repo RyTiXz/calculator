@@ -44,8 +44,7 @@ const operate = (firstNumber, operator, secondNumber) => {
     inputNumber.textContent = result;
 }
 
-console.log(5 * 5);
-// EventListener for alle numeric buttons
+// EventListener for alle numeric buttons + dot
 zeroButton.forEach(button => {
     if (button.id == 0) {
     button.addEventListener('click', () => {
@@ -68,6 +67,18 @@ buttons.forEach(button => {
     });
 }});
 
+buttons.forEach(button => {
+    if (button.id == 'dot') {
+    button.addEventListener('click', () => {
+        if (inputNumber.textContent.includes(".") === false) {
+            if (inputNumber.textContent == 0) {
+                inputNumber.textContent = 0;
+            } else {
+                inputNumber.textContent += ".";
+            }
+        }
+    });
+}});
 
 //Event Listener for all grey buttons
 // AC
@@ -144,4 +155,3 @@ buttons.forEach(button => {
             inputNumber.textContent = 0;
         });
     }});
-
