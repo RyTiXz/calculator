@@ -28,10 +28,10 @@ const divide = (a, b) => a / b;
 let firstNumber = 0;
 let operator = '';
 let secondNumber = 0;
+let result = 0;
 
 // Function to calculate result
 const operate = (firstNumber, operator, secondNumber) => {
-    let result = 0;
     if (operator === 'add') {
         result = add(firstNumber, secondNumber);
     } else if (operator === 'substract') {
@@ -55,6 +55,10 @@ zeroButton.forEach(button => {
                     inputNumber.textContent += button.id;
                 }
             }
+            if (result == Number(inputNumber.textContent)) {
+                console.log(result);
+                inputNumber.textContent = 0;
+            }
             if (firstNumber > 0 && firstNumber == Number(inputNumber.textContent)) {
                 inputNumber.textContent = 0;
             }
@@ -72,17 +76,21 @@ buttons.forEach(button => {
     if (button.id <= 9) {
     button.addEventListener('click', () => {
         if (firstNumber == 0) {
-            if (inputNumber.textContent == 0) {
+            if (inputNumber.textContent == '0') {
                 inputNumber.textContent = button.id;
             } else {
                 inputNumber.textContent += button.id;
             }
         }
-        if (firstNumber != 0 && firstNumber == Number(inputNumber.textContent)) {
+        if (result == Number(inputNumber.textContent)) {
+            console.log(result);
             inputNumber.textContent = 0;
         }
+        if (firstNumber != 0 && firstNumber == Number(inputNumber.textContent)) {
+            inputNumber.textContent = '0';
+        }
         if (firstNumber != 0 && firstNumber != Number(inputNumber.textContent)) {
-            if (inputNumber.textContent == 0) {
+            if (inputNumber.textContent == '0') {
                 inputNumber.textContent = button.id;
             } else {
                 inputNumber.textContent += button.id;
@@ -96,7 +104,7 @@ buttons.forEach(button => {
     button.addEventListener('click', () => {
         if (inputNumber.textContent.includes(".") === false) {
             if (inputNumber.textContent == 0) {
-                inputNumber.textContent = 0;
+                inputNumber.textContent = "0.";
             } else {
                 inputNumber.textContent += ".";
             }
@@ -110,6 +118,7 @@ buttons.forEach(button => {
     if (button.id == 'ac') {
     button.addEventListener('click', () => {
         inputNumber.textContent = "0";
+        result = 0;
         firstNumber = 0;
         secondNumber = 0;
     });
@@ -142,8 +151,10 @@ buttons.forEach(button => {
 buttons.forEach(button => {
     if (button.id == 'result') {
     button.addEventListener('click', () => {
-        secondNumber = Number(inputNumber.textContent);
-        operate(firstNumber, operator, secondNumber)
+        if (result == 0) {
+            secondNumber = Number(inputNumber.textContent);
+            operate(firstNumber, operator, secondNumber)
+        }
     });
 }});
 
@@ -205,12 +216,11 @@ buttons.forEach(button => {
             }
         });
 }});
-
-console.log();
     
 // To-Dos
 // Let number in display blink when user presses operator
-// // append child with blink animation, take away when blinked one time
+// // appendChild with blink animation, take away when blinked one time
+// // Alternative: appendChild to give operator button shadow to show that it's active
 
 // DONE //
 // make chain-additioning possible (like 12 + 12 + 12)
