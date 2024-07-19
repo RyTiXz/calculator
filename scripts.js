@@ -39,13 +39,11 @@ let display = 0;
 zeroButton.forEach(button => {
     if (button.id == 0) {
         button.addEventListener('click', () => {
-            if (display == 0) {
-                if (inputNumber.textContent == 0) {
+                if (inputNumber.textContent == '0') {
                     inputNumber.textContent = button.id;
                 } else {
                     inputNumber.textContent += button.id;
                 }
-            }
         });
     }});
 
@@ -53,6 +51,15 @@ buttons.forEach(button => {
     if (button.id <= 9) {
         button.addEventListener('click', () => {
             if (display == 0) {
+                if (inputNumber.textContent == '0') {
+                    inputNumber.textContent = button.id;
+                } else {
+                    inputNumber.textContent += button.id;
+                }
+            } else if (display != 0) {
+                inputNumber.textContent = 0;
+            }
+            else if (display != 0) {
                 if (inputNumber.textContent == '0') {
                     inputNumber.textContent = button.id;
                 } else {
@@ -110,7 +117,6 @@ buttons.forEach(button => {
 buttons.forEach(button => {
     if (button.id == 'result') {
     button.addEventListener('click', () => {
-        console.log('result but no output');
     });
 }});
 
@@ -118,7 +124,8 @@ buttons.forEach(button => {
 // EventListener for all operator button //
 buttons.forEach(button => {
     if (button.id == 'add') {
-            button.addEventListener('click', (e) => {
+            button.addEventListener('click', () => {
+                display = inputNumber.textContent
 
             });
     }});
