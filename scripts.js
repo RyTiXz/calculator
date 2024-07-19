@@ -18,51 +18,28 @@ const buttons = document.querySelectorAll('.inputButton')
 const zeroButton = document.querySelectorAll('.inputButtonZero')
 const inputNumber = document.querySelector('p.inputNumber')
 
+// // DOM manipulator through user click
+// buttons.forEach(button => {
+//     if (button.id == 'divide' || button.id == 'multiply' || button.id == 'substract' || button.id == 'add')
+//         button.addEventListener('click', () => {
+//         console.log('hello');
+//     });
+// });
+
 // Basic math functions with single operators
-const add = (a, b) => a + b;
-const substrac = (a, b) => a - b;
-const multiply = (a, b) => a * b;
-const divide = (a, b) => a / b;
+const add = (a, b) => Number(a + b);
+const substrac = (a, b) => Number(a - b);
+const multiply = (a, b) => Number(a * b);
+const divide = (a, b) => Number(a / b);
 
-// Variables for holding user input
-let firstNumber = 0;
-let operator = '';
-let secondNumber = 0;
-let result = 0;
-
-// Function to calculate result
-const operate = (firstNumber, operator, secondNumber) => {
-    if (operator === 'add') {
-        result = add(firstNumber, secondNumber);
-    } else if (operator === 'substract') {
-        result = substrac(firstNumber, secondNumber);
-    } else if (operator === 'multiply') {
-        result = multiply(firstNumber, secondNumber);
-    } else if (operator === 'divide') {
-        result = divide(firstNumber, secondNumber);
-    }
-    inputNumber.textContent = result;
-}
+// Variables for storing user input
+let display = 0;
 
 // EventListener for alle numeric buttons + dot
 zeroButton.forEach(button => {
     if (button.id == 0) {
         button.addEventListener('click', () => {
-            if (firstNumber == 0) {
-                if (inputNumber.textContent == 0) {
-                    inputNumber.textContent = button.id;
-                } else {
-                    inputNumber.textContent += button.id;
-                }
-            }
-            if (result == Number(inputNumber.textContent)) {
-                console.log(result);
-                inputNumber.textContent = 0;
-            }
-            if (firstNumber > 0 && firstNumber == Number(inputNumber.textContent)) {
-                inputNumber.textContent = 0;
-            }
-            if (firstNumber > 0 && firstNumber != Number(inputNumber.textContent)) {
+            if (display == 0) {
                 if (inputNumber.textContent == 0) {
                     inputNumber.textContent = button.id;
                 } else {
@@ -74,30 +51,16 @@ zeroButton.forEach(button => {
 
 buttons.forEach(button => {
     if (button.id <= 9) {
-    button.addEventListener('click', () => {
-        if (firstNumber == 0) {
-            if (inputNumber.textContent == '0') {
-                inputNumber.textContent = button.id;
-            } else {
-                inputNumber.textContent += button.id;
+        button.addEventListener('click', () => {
+            if (display == 0) {
+                if (inputNumber.textContent == '0') {
+                    inputNumber.textContent = button.id;
+                } else {
+                    inputNumber.textContent += button.id;
+                }
             }
-        }
-        if (result == Number(inputNumber.textContent)) {
-            console.log(result);
-            inputNumber.textContent = 0;
-        }
-        if (firstNumber != 0 && firstNumber == Number(inputNumber.textContent)) {
-            inputNumber.textContent = '0';
-        }
-        if (firstNumber != 0 && firstNumber != Number(inputNumber.textContent)) {
-            if (inputNumber.textContent == '0') {
-                inputNumber.textContent = button.id;
-            } else {
-                inputNumber.textContent += button.id;
-            }
-        }
-    });
-}});
+        });
+    }});
 
 buttons.forEach(button => {
     if (button.id == 'dot') {
@@ -118,24 +81,20 @@ buttons.forEach(button => {
     if (button.id == 'ac') {
     button.addEventListener('click', () => {
         inputNumber.textContent = "0";
-        result = 0;
-        firstNumber = 0;
-        secondNumber = 0;
+        display = 0;
     });
-    // Not working for now //
-    // if (inputNumber.textContent !== "0") {
-    //     buttons[0].textContent = "C"
-    // }
+
 }});
 // plusminus
 buttons.forEach(button => {
-    if (button.id == 'plusminus') {
+    if (button.id == 'plusMinus') {
     button.addEventListener('click', () => {
         let numberSafe = inputNumber.textContent;
         numberSafe *= -1
         inputNumber.textContent = numberSafe;
     });
 }});
+
 // percentage
 buttons.forEach(button => {
     if (button.id == 'percentage') {
@@ -151,10 +110,7 @@ buttons.forEach(button => {
 buttons.forEach(button => {
     if (button.id == 'result') {
     button.addEventListener('click', () => {
-        if (result == 0) {
-            secondNumber = Number(inputNumber.textContent);
-            operate(firstNumber, operator, secondNumber)
-        }
+        console.log('result but no output');
     });
 }});
 
@@ -162,66 +118,28 @@ buttons.forEach(button => {
 // EventListener for all operator button //
 buttons.forEach(button => {
     if (button.id == 'add') {
-            button.addEventListener('click', () => {
-                if (firstNumber == 0) {
-                    operator = "add";
-                    firstNumber = Number(inputNumber.textContent);
-                    // inputNumber.textContent = 0;
-                } else if (firstNumber != 0) {
-                    operator = "add";
-                    firstNumber += Number(inputNumber.textContent);
-                    inputNumber.textContent = firstNumber;
-                }
+            button.addEventListener('click', (e) => {
+
             });
     }});
 
 buttons.forEach(button => {
     if (button.id == 'substract') {
         button.addEventListener('click', () => {
-            if (firstNumber == 0) {
-                operator = "substract";
-                firstNumber = Number(inputNumber.textContent);
-            } else if (firstNumber != 0) {
-                operator = "substract";
-                firstNumber -= Number(inputNumber.textContent);
-                inputNumber.textContent = firstNumber;
-            }
+
         });
 }});
 
 buttons.forEach(button => {
     if (button.id == 'multiply') {
         button.addEventListener('click', () => {
-            if (firstNumber == 0) {
-                operator = "multiply";
-                firstNumber = Number(inputNumber.textContent);
-            } else if (firstNumber != 0) {
-                operator = "multiply";
-                firstNumber *= Number(inputNumber.textContent);
-                inputNumber.textContent = firstNumber;
-            }
+
         });
 }});
 
 buttons.forEach(button => {
     if (button.id == 'divide') {
         button.addEventListener('click', () => {
-            if (firstNumber == 0) {
-                operator = "divide";
-                firstNumber = Number(inputNumber.textContent);
-            } else if (firstNumber != 0) {
-                operator = "divide";
-                firstNumber /= Number(inputNumber.textContent);
-                inputNumber.textContent = firstNumber;
-            }
+
         });
 }});
-    
-// To-Dos
-// Let number in display blink when user presses operator
-// // appendChild with blink animation, take away when blinked one time
-// // Alternative: appendChild to give operator button shadow to show that it's active
-
-// DONE //
-// make chain-additioning possible (like 12 + 12 + 12)
-// // should show result of first addition when pressing the second 'add'
