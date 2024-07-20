@@ -162,11 +162,17 @@ const calculate = (a, b) => {
 buttons.forEach(button => {
     if (button.id == 'result') {
     button.addEventListener('click', () => {
-        result = calculate(displayVariable, inputNumber.textContent);
-        inputNumber.textContent = result;
-        result = 0;
-        displayVariable = 0
-        operator = ''
+        if (displayVariable != 0 && result != NaN) {
+            result = calculate(displayVariable, inputNumber.textContent);
+            inputNumber.textContent = result;
+            result = 0;
+            displayVariable = 0
+            operator = ''
+            console.log(result);
+            console.log(displayVariable);
+            console.log(operator);
+            console.log(typeof(inputNumber.textContent));
+        }
     });
 }});
 
