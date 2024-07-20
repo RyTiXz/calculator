@@ -18,48 +18,69 @@ const buttons = document.querySelectorAll('.inputButton')
 const zeroButton = document.querySelectorAll('.inputButtonZero')
 const inputNumber = document.querySelector('p.inputNumber')
 
-// // DOM manipulator through user click
-// buttons.forEach(button => {
-//     if (button.id == 'divide' || button.id == 'multiply' || button.id == 'substract' || button.id == 'add')
-//         button.addEventListener('click', () => {
-//         console.log('hello');
-//     });
-// });
-
-// Basic math functions with single operators
-const add = (a, b) => Number(a + b);
-const substrac = (a, b) => Number(a - b);
-const multiply = (a, b) => Number(a * b);
-const divide = (a, b) => Number(a / b);
-
 // Variables for storing user input
-let display = 0;
+let displayVariable = 0;
+let result = null;
+let operator = '';
 
 // EventListener for alle numeric buttons + dot
 zeroButton.forEach(button => {
     if (button.id == 0) {
         button.addEventListener('click', () => {
+            if (displayVariable == 0) {
                 if (inputNumber.textContent == '0') {
                     inputNumber.textContent = button.id;
                 } else {
                     inputNumber.textContent += button.id;
                 }
+            } 
+            if (result == Number(inputNumber.textContent)) {
+                inputNumber.textContent = 0;
+                displayVariable = 0;
+                result = 0;
+                if (inputNumber.textContent == '0') {
+                    inputNumber.textContent = button.id;
+                } else {
+                    inputNumber.textContent += button.id;
+                }
+            }
+            if (displayVariable != 0 && displayVariable == Number(inputNumber.textContent)) {
+                inputNumber.textContent = '0';
+            }
+            if (displayVariable != 0 && displayVariable != Number(inputNumber.textContent)) {
+                if (inputNumber.textContent == '0') {
+                    inputNumber.textContent = button.id;
+                } else {
+                    inputNumber.textContent += button.id;
+                }
+            }
         });
     }});
 
 buttons.forEach(button => {
     if (button.id <= 9) {
         button.addEventListener('click', () => {
-            if (display == 0) {
+            if (displayVariable == 0) {
                 if (inputNumber.textContent == '0') {
                     inputNumber.textContent = button.id;
                 } else {
                     inputNumber.textContent += button.id;
                 }
-            } else if (display != 0) {
+            } 
+            else if (result == Number(inputNumber.textContent)) {
                 inputNumber.textContent = 0;
+                displayVariable = 0;
+                result = 0;
+                if (inputNumber.textContent == '0') {
+                    inputNumber.textContent = button.id;
+                } else {
+                    inputNumber.textContent += button.id;
+                }
             }
-            else if (display != 0) {
+            if (displayVariable != 0 && displayVariable == inputNumber.textContent) {
+                inputNumber.textContent = '0';
+            }
+            if (displayVariable != 0 && displayVariable != inputNumber.textContent) {
                 if (inputNumber.textContent == '0') {
                     inputNumber.textContent = button.id;
                 } else {
@@ -88,7 +109,9 @@ buttons.forEach(button => {
     if (button.id == 'ac') {
     button.addEventListener('click', () => {
         inputNumber.textContent = "0";
-        display = 0;
+        displayVariable = 0;
+        result = null;
+        operator = '';
     });
 
 }});
@@ -112,41 +135,92 @@ buttons.forEach(button => {
     });
 }});
 
+// Basic math functions with single operators
+const calculate = (a, b) => {
+    if (operator == '+') {
+        return (Number(a) + Number(b))
+    } else if (operator == '-') {
+        return (Number(a) - Number(b))
+    } else if (operator == '*') {
+        return (Number(a) * Number(b))
+    } else if (operator == '/') {
+        return (Number(a) / Number(b))
+    }
+}
 
 // EventListener for result
 buttons.forEach(button => {
     if (button.id == 'result') {
     button.addEventListener('click', () => {
+        result = calculate(displayVariable, inputNumber.textContent);
+        inputNumber.textContent = result;
+        result = 0;
+        displayVariable = 0
+        operator = ''
     });
 }});
 
 
 // EventListener for all operator button //
+
 buttons.forEach(button => {
     if (button.id == 'add') {
-            button.addEventListener('click', () => {
-                display = inputNumber.textContent
-
-            });
-    }});
-
-buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            if (displayVariable == 0) {
+                operator = '+';
+                displayVariable = inputNumber.textContent
+            } else {
+                displayVariable = calculate(displayVariable, inputNumber.textContent);
+                inputNumber.textContent = displayVariable;
+                operator = '+'
+            }
+        });
+    }
     if (button.id == 'substract') {
         button.addEventListener('click', () => {
-
+            if (displayVariable == 0) {
+                operator = '-';
+                displayVariable = inputNumber.textContent
+            } else {
+                displayVariable = calculate(displayVariable, inputNumber.textContent);
+                inputNumber.textContent = displayVariable;
+                operator = '-'
+            }
         });
-}});
-
-buttons.forEach(button => {
+    }
     if (button.id == 'multiply') {
         button.addEventListener('click', () => {
-
+            if (displayVariable == 0) {
+                operator = '*';
+                displayVariable = inputNumber.textContent
+            } else {
+                displayVariable = calculate(displayVariable, inputNumber.textContent);
+                inputNumber.textContent = displayVariable;
+                operator = '*'
+            }
         });
-}});
-
-buttons.forEach(button => {
+    }
     if (button.id == 'divide') {
         button.addEventListener('click', () => {
-
+            if (displayVariable == 0) {
+                operator = '/';
+                displayVariable = inputNumber.textContent
+            } else {
+                displayVariable = calculate(displayVariable, inputNumber.textContent);
+                inputNumber.textContent = displayVariable;
+                operator = '/'
+            }
         });
-}});
+    }
+});
+/*
+To-Dos:
+// Chain operations not working correctly for now. should use
+result of first operation and calculate with this the second
+and so on.
+
+First operator sets an operator, if there already is one,
+the first operation should be calculated.
+
+// numbers should be rounded to 2 decimals 
+*/
