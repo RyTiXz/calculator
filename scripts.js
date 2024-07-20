@@ -137,18 +137,24 @@ buttons.forEach(button => {
 
 // Basic math functions with single operators
 const calculate = (a, b) => {
+    let calculateResult;
     if (operator == '+') {
         // console.log('add =' + (Number(a) + Number(b).toFixed(2)));
-        return ((Number(a) + Number(b)).toFixed(3))
+        calculateResult = ((Number(a) + Number(b)).toFixed(3))
     } else if (operator == '-') {
         // console.log('substract =' + (Number(a) - Number(b).toFixed(2)));
-        return ((Number(a) - Number(b)).toFixed(3))
+        calculateResult = ((Number(a) - Number(b)).toFixed(3))
     } else if (operator == '*') {
         // console.log('multiply =' + (Number(a) * Number(b).toFixed(2)))
-        return ((Number(a) * Number(b)).toFixed(3))
+        calculateResult = ((Number(a) * Number(b)).toFixed(3))
     } else if (operator == '/') {
         // console.log('divide =' + (Number(a) / Number(b).toFixed(2)))
-        return ((Number(a) / Number(b)).toFixed(3))
+        calculateResult = ((Number(a) / Number(b)).toFixed(3))
+    }
+    if (calculateResult % 1 !== 0) {
+        return Number(calculateResult).toFixed(2);
+    } else {
+        return Number(calculateResult).toString();
     }
 }
 
@@ -217,6 +223,8 @@ buttons.forEach(button => {
         });
     }
 });
+
+
 /*
 To-Dos:
 // Chain operations not working correctly for now. should use
