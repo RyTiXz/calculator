@@ -138,13 +138,17 @@ buttons.forEach(button => {
 // Basic math functions with single operators
 const calculate = (a, b) => {
     if (operator == '+') {
-        return (Number(a) + Number(b))
+        // console.log('add =' + (Number(a) + Number(b).toFixed(2)));
+        return ((Number(a) + Number(b)).toFixed(3))
     } else if (operator == '-') {
-        return (Number(a) - Number(b))
+        // console.log('substract =' + (Number(a) - Number(b).toFixed(2)));
+        return ((Number(a) - Number(b)).toFixed(3))
     } else if (operator == '*') {
-        return (Number(a) * Number(b))
+        // console.log('multiply =' + (Number(a) * Number(b).toFixed(2)))
+        return ((Number(a) * Number(b)).toFixed(3))
     } else if (operator == '/') {
-        return (Number(a) / Number(b))
+        // console.log('divide =' + (Number(a) / Number(b).toFixed(2)))
+        return ((Number(a) / Number(b)).toFixed(3))
     }
 }
 
