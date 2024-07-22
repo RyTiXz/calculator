@@ -181,7 +181,9 @@ buttons.forEach(button => {
 buttons.forEach(button => {
     if (button.id == 'add') {
         button.addEventListener('click', () => {
-            if (inputNumber.textContent == result) {
+            if (operator == '+') {
+                return false
+            } else if (inputNumber.textContent == result) {
                 operator = '+';
                 displayVariable = result;
                 result = 0;
@@ -197,14 +199,16 @@ buttons.forEach(button => {
     }
     if (button.id == 'substract') {
         button.addEventListener('click', () => {
-            if (inputNumber.textContent == result) {
+            if (operator == '-') {
+                return false
+            } else if (inputNumber.textContent == result) {
                 operator = '-';
                 displayVariable = result;
                 result = 0;
             } else if (displayVariable == 0) {
                 operator = '-';
                 displayVariable = inputNumber.textContent
-            } else {
+            } else if (displayVariable != 0 && displayVariable != result) {
                 displayVariable = calculate(displayVariable, inputNumber.textContent);
                 inputNumber.textContent = displayVariable;
                 operator = '-'
@@ -213,14 +217,16 @@ buttons.forEach(button => {
     }
     if (button.id == 'multiply') {
         button.addEventListener('click', () => {
-            if (inputNumber.textContent == result) {
+            if (operator == '*') {
+                return false
+            } else if (inputNumber.textContent == result) {
                 operator = '*';
                 displayVariable = result;
                 result = 0;
             } else if (displayVariable == 0) {
                 operator = '*';
                 displayVariable = inputNumber.textContent
-            } else {
+            } else if (displayVariable != 0 && displayVariable != result) {
                 displayVariable = calculate(displayVariable, inputNumber.textContent);
                 inputNumber.textContent = displayVariable;
                 operator = '*'
@@ -229,14 +235,16 @@ buttons.forEach(button => {
     }
     if (button.id == 'divide') {
         button.addEventListener('click', () => {
-            if (inputNumber.textContent == result) {
+            if (operator == '/') {
+                return false
+            } else if (inputNumber.textContent == result) {
                 operator = '/';
                 displayVariable = result;
                 result = 0;
             } else if (displayVariable == 0) {
                 operator = '/';
                 displayVariable = inputNumber.textContent
-            } else {
+            } else if (displayVariable != 0 && displayVariable != result) {
                 displayVariable = calculate(displayVariable, inputNumber.textContent);
                 inputNumber.textContent = displayVariable;
                 operator = '/'
