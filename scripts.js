@@ -27,31 +27,33 @@ let operator = '';
 zeroButton.forEach(button => {
     if (button.id == 0) {
         button.addEventListener('click', () => {
-            if (displayVariable == 0) {
-                if (inputNumber.textContent == '0') {
-                    inputNumber.textContent = button.id;
-                } else {
-                    inputNumber.textContent += button.id;
+            if (inputNumber.textContent.length < 7){
+                if (displayVariable == 0) {
+                    if (inputNumber.textContent == '0') {
+                        inputNumber.textContent = button.id;
+                    } else {
+                        inputNumber.textContent += button.id;
+                    }
+                } 
+                if (result == Number(inputNumber.textContent)) {
+                    inputNumber.textContent = 0;
+                    displayVariable = 0;
+                    result = 0;
+                    if (inputNumber.textContent == '0') {
+                        inputNumber.textContent = button.id;
+                    } else {
+                        inputNumber.textContent += button.id;
+                    }
                 }
-            } 
-            if (result == Number(inputNumber.textContent)) {
-                inputNumber.textContent = 0;
-                displayVariable = 0;
-                result = 0;
-                if (inputNumber.textContent == '0') {
-                    inputNumber.textContent = button.id;
-                } else {
-                    inputNumber.textContent += button.id;
+                if (displayVariable != 0 && displayVariable == Number(inputNumber.textContent)) {
+                    inputNumber.textContent = '0';
                 }
-            }
-            if (displayVariable != 0 && displayVariable == Number(inputNumber.textContent)) {
-                inputNumber.textContent = '0';
-            }
-            if (displayVariable != 0 && displayVariable != Number(inputNumber.textContent)) {
-                if (inputNumber.textContent == '0') {
-                    inputNumber.textContent = button.id;
-                } else {
-                    inputNumber.textContent += button.id;
+                if (displayVariable != 0 && displayVariable != Number(inputNumber.textContent)) {
+                    if (inputNumber.textContent == '0') {
+                        inputNumber.textContent = button.id;
+                    } else {
+                        inputNumber.textContent += button.id;
+                    }
                 }
             }
         });
@@ -60,31 +62,33 @@ zeroButton.forEach(button => {
 buttons.forEach(button => {
     if (button.id <= 9) {
         button.addEventListener('click', () => {
-            if (displayVariable == 0) {
-                if (inputNumber.textContent == '0') {
-                    inputNumber.textContent = button.id;
-                } else {
-                    inputNumber.textContent += button.id;
+            if (inputNumber.textContent.length < 7){
+                if (displayVariable == 0) {
+                    if (inputNumber.textContent == '0') {
+                        inputNumber.textContent = button.id;
+                    } else {
+                        inputNumber.textContent += button.id;
+                    }
+                } 
+                else if (result == inputNumber.textContent) {
+                    inputNumber.textContent = 0;
+                    displayVariable = 0;
+                    result = 0;
+                    if (inputNumber.textContent == '0') {
+                        inputNumber.textContent = button.id;
+                    } else {
+                        inputNumber.textContent += button.id;
+                    }
                 }
-            } 
-            else if (result == Number(inputNumber.textContent)) {
-                inputNumber.textContent = 0;
-                displayVariable = 0;
-                result = 0;
-                if (inputNumber.textContent == '0') {
-                    inputNumber.textContent = button.id;
-                } else {
-                    inputNumber.textContent += button.id;
+                if (displayVariable != 0 && displayVariable == inputNumber.textContent) {
+                    inputNumber.textContent = '0';
                 }
-            }
-            if (displayVariable != 0 && displayVariable == inputNumber.textContent) {
-                inputNumber.textContent = '0';
-            }
-            if (displayVariable != 0 && displayVariable != inputNumber.textContent) {
-                if (inputNumber.textContent == '0') {
-                    inputNumber.textContent = button.id;
-                } else {
-                    inputNumber.textContent += button.id;
+                if (displayVariable != 0 && displayVariable != inputNumber.textContent) {
+                    if (inputNumber.textContent == '0') {
+                        inputNumber.textContent = button.id;
+                    } else {
+                        inputNumber.textContent += button.id;
+                    }
                 }
             }
         });
@@ -162,17 +166,12 @@ const calculate = (a, b) => {
 buttons.forEach(button => {
     if (button.id == 'result') {
     button.addEventListener('click', () => {
-        if (displayVariable != 0 && result != NaN) {
+        if (inputNumber.textContent == result) {
+            return false;
+        } else if (displayVariable != 0) {
             result = calculate(displayVariable, inputNumber.textContent);
             inputNumber.textContent = result;
-            result = 0;
-            displayVariable = 0
-            operator = ''
-            console.log(result);
-            console.log(displayVariable);
-            console.log(operator);
-            console.log(typeof(inputNumber.textContent));
-        }
+        } 
     });
 }});
 
@@ -182,19 +181,27 @@ buttons.forEach(button => {
 buttons.forEach(button => {
     if (button.id == 'add') {
         button.addEventListener('click', () => {
-            if (displayVariable == 0) {
+            if (inputNumber.textContent == result) {
+                operator = '+';
+                displayVariable = result;
+                result = 0;
+            } else if (displayVariable == 0) {
                 operator = '+';
                 displayVariable = inputNumber.textContent
-            } else {
+            } else if (displayVariable != 0 && displayVariable != result) {
                 displayVariable = calculate(displayVariable, inputNumber.textContent);
                 inputNumber.textContent = displayVariable;
                 operator = '+'
-            }
+            } 
         });
     }
     if (button.id == 'substract') {
         button.addEventListener('click', () => {
-            if (displayVariable == 0) {
+            if (inputNumber.textContent == result) {
+                operator = '-';
+                displayVariable = result;
+                result = 0;
+            } else if (displayVariable == 0) {
                 operator = '-';
                 displayVariable = inputNumber.textContent
             } else {
@@ -206,7 +213,11 @@ buttons.forEach(button => {
     }
     if (button.id == 'multiply') {
         button.addEventListener('click', () => {
-            if (displayVariable == 0) {
+            if (inputNumber.textContent == result) {
+                operator = '*';
+                displayVariable = result;
+                result = 0;
+            } else if (displayVariable == 0) {
                 operator = '*';
                 displayVariable = inputNumber.textContent
             } else {
@@ -218,7 +229,11 @@ buttons.forEach(button => {
     }
     if (button.id == 'divide') {
         button.addEventListener('click', () => {
-            if (displayVariable == 0) {
+            if (inputNumber.textContent == result) {
+                operator = '/';
+                displayVariable = result;
+                result = 0;
+            } else if (displayVariable == 0) {
                 operator = '/';
                 displayVariable = inputNumber.textContent
             } else {
@@ -233,12 +248,9 @@ buttons.forEach(button => {
 
 /*
 To-Dos:
-// Chain operations not working correctly for now. should use
-result of first operation and calculate with this the second
-and so on.
+//
 
-First operator sets an operator, if there already is one,
-the first operation should be calculated.
-
-// numbers should be rounded to 2 decimals 
+known Bugs:
+// double clicking operater results in operating 
+// only "AC" works when there are 7 digits on screen
 */

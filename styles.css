@@ -54,7 +54,12 @@ body {
     font-size: 45px;
     justify-content: right;
     align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* max-width: 200px; */
 }
+
 
 .input p {
     margin: 0 5px 0 0;
