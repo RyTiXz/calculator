@@ -204,7 +204,7 @@ buttons.forEach(button => {
             } else if (displayVariable == 0) {
                 operator = '-';
                 displayVariable = inputNumber.textContent
-            } else {
+            } else if (displayVariable != 0 && displayVariable != result) {
                 displayVariable = calculate(displayVariable, inputNumber.textContent);
                 inputNumber.textContent = displayVariable;
                 operator = '-'
@@ -220,7 +220,7 @@ buttons.forEach(button => {
             } else if (displayVariable == 0) {
                 operator = '*';
                 displayVariable = inputNumber.textContent
-            } else {
+            } else if (displayVariable != 0 && displayVariable != result) {
                 displayVariable = calculate(displayVariable, inputNumber.textContent);
                 inputNumber.textContent = displayVariable;
                 operator = '*'
@@ -236,7 +236,7 @@ buttons.forEach(button => {
             } else if (displayVariable == 0) {
                 operator = '/';
                 displayVariable = inputNumber.textContent
-            } else {
+            } else if (displayVariable != 0 && displayVariable != result) {
                 displayVariable = calculate(displayVariable, inputNumber.textContent);
                 inputNumber.textContent = displayVariable;
                 operator = '/'
